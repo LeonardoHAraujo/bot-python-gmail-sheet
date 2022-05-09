@@ -22,7 +22,6 @@ dotenv.load_dotenv()
 
 # Constants.
 SP = [os.getenv('SP')]
-LOCATION = os.getenv('LOCATION')
 EMAIL = os.getenv('EMAIL')
 PASSWORD_EMAIL = os.getenv('PASSWORD_EMAIL')
 NAME_RANGE = os.getenv('NAME_RANGE')
@@ -37,7 +36,7 @@ def main():
 
     m.select('inbox')
 
-    rs, dt = m.search(None, f'(FROM "{LOCATION}")')
+    rs, dt = m.search(None, '(UNSEEN FROM "VOE MILHAS")')
 
     for em in dt[0].split():
         rs, dt = m.fetch(em, '(RFC822)')
