@@ -42,12 +42,14 @@ def main():
         rs, dt = m.fetch(em, '(RFC822)')
         bd = email.message_from_string(dt[0][1].decode('utf-8'))
 
-        ms, _ = bd.get_payload()
-        lst = ms.get_payload().split('---')[0].strip().split('\r\n')
+        ms = bd.get_payload()
+        lst = ms.split('---')[0].split('<br>')
         vls = []
 
         for v in lst:
-            vls.append(v.split(': ')[1] or 'Nenhum')
+            vls.append(v.split(': ')[1] if v else 'Nenhum')
+
+        vls = [v for v in vls if v != 'Nenhum']
 
         ist_dt(vls)
 
